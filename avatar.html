@@ -1,0 +1,35 @@
+<html>
+<head>
+
+<style>body{background-color:white}.User-list{list-style:none}.Avatar{text-align:center}.Avatar img{width:100px;height:100px}.Avatar h4{color:gray;font-size:15px;font-family:Perpetua Titling MT}.main{text-align:center;background-image:url(https://i.pinimg.com/736x/b8/45/a1/b845a1b3a4fb60968454653c6d7c1725.jpg);background-size:cover;max-width:1300px;margin:25px;padding:10px}h1{font-size:50px;font-family:Perpetua Titling MT;color:salmon;border-color:white;border-style:solid;max-width:1500px;max-height:500px;margin:50px;padding:50px;text-align:center;margin-left:100px;margin-bottom:40px;background-color:#fff;margin-left:100px}input{font-size:16px;font-family:Perpetua Titling MT;border-style:solid;border-color:white;padding:10px;margin:10px;text-align:center;opacity:.7}button{font-size:20px;border-style:solid;border-color:white;font-family:Perpetua Titling MT;max-width:200px;max-height:100px;margin:10px;padding:10px;background-color:#fff;color:salmon}li{background-color:white;width:40%;margin-left:300px;padding:20px;border-style:solid;border-color:white;opacity:.8;}</style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+<script>angular.module('app',[]).controller('mainCtrl',mainCtrl).directive('avatar',avatarDirective);function mainCtrl($scope){$scope.users=[{name:'Sonica Kommu',avatarUrl:' https://i.pinimg.com/originals/c9/be/77/c9be77286db0a00c7b71adfff01f9e10.jpg ',email:'mynameissonica@gmail.com'}];$scope.addNew=function(user){$scope.users.push({name:user.name,avatarUrl:user.url,email:user.email});user.name='';user.url='';user.email='';};}
+function avatarDirective(){return{scope:{user:'='},restrict:'E',replace:'true',template:('<div class="Avatar">'+'<img ng-src="{{user.avatarUrl}}" />'+'<h4>{{user.name}}</h4>'+'<h4>{{user.email}}</h4>'+'</div>'),link:link};function link(scope){if(!scope.user.avatarUrl){scope.user.avatarUrl='https://www.drupal.org/files/issues/default-avatar.png';}}}</script>
+	<meta charset="utf-8">
+	<title>User Avatar Template</title>
+
+</head>
+<body>
+<div class='main'>
+<div ng-app='app' ng-controller='mainCtrl'>
+	<h1>Create New User</h1>
+<form name='userForm' ng-submit='addNew(userForm)'>
+	<div id='places'> <input placeholder='Name' ng-model='userForm.name'/> <br></div>
+	<div id='places'> <input placeholder='Image Url' ng-model='userForm.url'/> <br></div>
+	<div id='places'> <input placeholder='E-mail' ng-model='userForm.email'/> <br></div>
+	<div id='butt'> <button type='submit'>Add New</button></div>
+</form>
+
+
+<ul class='User-list'>
+	<li ng-repeat='user in users'>
+		<avatar user='user'/>
+	</li>
+</ul>
+</div>
+</div>
+</body>
+
+</html>
